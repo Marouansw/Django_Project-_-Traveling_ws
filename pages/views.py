@@ -22,3 +22,11 @@ def destination(request):
 def package(request):
   template = loader.get_template('package.html')
   return HttpResponse(template.render())
+
+def contact(request):
+  template = loader.get_template('contact.html')
+  return HttpResponse(template.render())
+
+def register(request):
+  template = loader.get_template('register.html')
+  return HttpResponse(template.render())
