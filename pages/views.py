@@ -1,32 +1,34 @@
+from multiprocessing import context
 from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render
+from django.template import RequestContext, loader
+
+from members import forms
 # Create your views here.
 
 
 def home(request):
-  template = loader.get_template('index.html')
-  return HttpResponse(template.render())
+  return render(request,'index.html')
+
 
 def about(request):
-  template = loader.get_template('about.html')
-  return HttpResponse(template.render())
+    return render(request,'about.html')
+
 
 def service(request):
-  template = loader.get_template('service.html')
-  return HttpResponse(template.render())
+    return render(request,'service.html')
 
 def destination(request):
-  template = loader.get_template('destination.html')
-  return HttpResponse(template.render())
+    return render(request,'destination.html')
+
 
 def package(request):
-  template = loader.get_template('package.html')
-  return HttpResponse(template.render())
+    return render(request,'package.html')
+
 
 def contact(request):
-  template = loader.get_template('contact.html')
-  return HttpResponse(template.render())
+   return render(request,'contact.html')
+
 
 def register(request):
-  template = loader.get_template('register.html')
-  return HttpResponse(template.render())
+    return render(request,'ragister.html')

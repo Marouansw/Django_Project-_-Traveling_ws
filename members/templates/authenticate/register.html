@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+{% if form.errors %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Attention!</strong> There was an error with your form
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endif %}
+<div style="background-color: #eee;">
+<!-- <div class="mb-3"> -->
+<div class="w-50 p-3" style="background-color: #ffffff;margin-left: 25%;">
+<h2 style="text-align: center;"><strong>SIGN UP</strong></h2>
+<form method="post" action="" style="margin-top:25px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+<!-- {# Display the entire context for debugging #}
+{{ request }}
+   
+{# Display the 'user' variable in the context #}
+{{ user }} -->
+{% if request.user.is_authenticated %}
+<span class="navbar-text">
+    logged in as {{user.username}}{{ user.username }}
+    {{ request.user.first_name }}
+    {{ user.last_name }}
+    {{ user.email }} |
+</span>
+<li class="nav-item">
+    <a class="nav-link" href="/logout">logout</a>
+</li>
+{% else %}
+<a href="/register.html">
+    <button type="button" class="btn btn-primary" style="border-radius: 0.75em; margin-left: 40px;width: 130px;height: 50px;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Sign up</button>
+</a>
+{% endif %}
+
+</div>
+</div>
+<!-- </div> -->
+
+{% endblock %}
+{% block footer%}
+{% endblock %}
+
+
