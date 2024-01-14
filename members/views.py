@@ -19,7 +19,6 @@ def register_user(request):
             password = form.cleaned_data['password1']
             user1 = authenticate(request,username=username,password=password)
             login(request,user)
-            print("User authenticated:", user1.username)
             return redirect('/index.html')
     else:
         form = RegisterUserForm()
