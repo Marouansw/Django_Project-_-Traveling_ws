@@ -18,28 +18,10 @@
 <form method="post" action="" style="margin-top:25px;">
     {% csrf_token %}
     {{ form.as_p }}
+    <h6 style="text-align: right;">Back<a href="/index.html"> Home</a></h6>
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
-<!-- {# Display the entire context for debugging #}
-{{ request }}
-   
-{# Display the 'user' variable in the context #}
-{{ user }} -->
-{% if request.user.is_authenticated %}
-<span class="navbar-text">
-    logged in as {{user.username}}{{ user.username }}
-    {{ request.user.first_name }}
-    {{ user.last_name }}
-    {{ user.email }} |
-</span>
-<li class="nav-item">
-    <a class="nav-link" href="/logout">logout</a>
-</li>
-{% else %}
-<a href="/register.html">
-    <button type="button" class="btn btn-primary" style="border-radius: 0.75em; margin-left: 40px;width: 130px;height: 50px;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Sign up</button>
-</a>
-{% endif %}
+
 
 </div>
 </div>

@@ -8,6 +8,9 @@ from members.forms import RegisterUserForm
 # Create your views here.
 
 def register_user(request):
+    if request.user.is_authenticated:
+        messages.success(request,"Already Logged in!! Logout First ")
+        return redirect('/index.html')
     if request.method == "POST" :
         form = RegisterUserForm(request.POST)
         if form.is_valid():
@@ -31,8 +34,10 @@ def register_user(request):
 
 
 def login_user(request):
-    # if request.user.is_authenticated:
-    #     return redirect('/index.html')
+    if request.user.is_authenticated:
+        messages.success(request,"Already Logged in!! Logout First ")
+        return redirect('/index.html')
+
     if request.method == "POST" :
         username = request.POST["username"]
         password = request.POST["password"]
@@ -40,7 +45,7 @@ def login_user(request):
         if user is not None and user.is_active:
             login(request, user)
             print("User authenticated:", user.username)
-            # messages.success(request,"Login Succeed !! ")
+            messages.success(request,"Login Succeed !! ")
             print(request.user)
             return redirect('/index.html')
         else:
