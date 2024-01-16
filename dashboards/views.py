@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth.decorators import login_required
 from members.forms import UpdatePasswdForm, UpdateProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
@@ -15,6 +15,22 @@ def dashboard(request):
 @login_required
 def profil(request):
     return render(request,'profile.html')
+
+@login_required
+def checkout(request):
+    return render(request,'checkout.html')
+
+@login_required
+def users(request):
+    users = User.objects.all()
+    return render(request,'Users.html',{'users':users})
+
+@login_required
+def delete_user(request,usk):
+    user = get_object_or_404(User, username=usk)
+    if user.delete() :
+        messages.success(request, 'Changes Saved !!')
+        return redirect('/Users')  # Redirect to the user's profile page or another appropriate page
 
 @login_required
 def update_user(request):

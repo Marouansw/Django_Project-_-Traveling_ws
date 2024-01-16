@@ -9,6 +9,11 @@ urlpatterns =[
     path('dashboard/', views.dashboard, name='dash'),
     path('profil/', views.update_user, name='update'),
     path('password/', views.update_pwd, name='update'),
+    path('checkout/', views.checkout, name='check'),
+    path('Users/', views.users, name='check'),
+    # path('delete_user/', views.users, name='delete'),
+    path('delete_user/<str:usk>/', views.delete_user, name='delete_user'),
+
 
 
 ]

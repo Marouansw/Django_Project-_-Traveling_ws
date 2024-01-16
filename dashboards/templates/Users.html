@@ -1,0 +1,47 @@
+{% extends "base1.html" %}
+{% load static %}
+{% block title %}USERS{% endblock %}
+{% block page %}USERS'S PAGE{% endblock %}
+{% block content %}
+
+<div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title">MY USERS</h3>
+                            <div class="table-responsive">
+                                <table class="table text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0"><strong>USERNAME</strong></th>
+                                            <th class="border-top-0"><strong>FIRST NAME</strong></th>
+                                            <th class="border-top-0"><strong>LAST NAME</strong></th>
+                                            <th class="border-top-0"><strong>STATUT</strong></th>
+                                            <th class="border-top-0"><strong>MANAGE</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for u in users %}
+                                        <tr>
+                                            <td>{{u.username}}</td>
+                                            <td>{{u.first_name}}</td>
+                                            <td>{{u.last_name}}</td>
+                                            <td>{% if u.is_staff %}Admin{%else%}User{% endif %}</td>
+                                            <td><a href= "{%url 'delete_user' usk=u.username %}"><button type="button" class="btn btn-danger" onclick="ConfirmAlert()">Delete</a></button>
+                                                
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                          
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+       
+            </div>
+  {% endblock %}

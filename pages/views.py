@@ -2,13 +2,16 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import RequestContext, loader
+from .models import Package
 
 from members import forms
 # Create your views here.
 
 
 def home(request):
-  return render(request,'index.html')
+  package = Package.objects.all()
+  return render(request,'index.html',{'package':package})
+
 
 
 def about(request):
@@ -23,7 +26,8 @@ def destination(request):
 
 
 def package(request):
-    return render(request,'package.html')
+    package = Package.objects.all()
+    return render(request,'package.html',{'package':package})
 
 
 def contact(request):

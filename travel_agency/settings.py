@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'pages',
     'members',
     'dashboards',
+    'sweetify',
     'crispy_forms',
     'crispy_bootstrap5',
      
 ]
+ 
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
