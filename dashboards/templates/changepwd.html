@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Change_Password{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}
+<form method="post" style="margin: 10%; margin-left: 15%;" >
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <button style="margin-right: 75%;" type="submit" class="btn btn-success">Save changes</button>   OR GO <a href="/profil" style="text-decoration: underline;"><strong>BACK</strong></a> 
+  </form>
+
+{% endblock %}
+{% block footer%}
+{% endblock %}

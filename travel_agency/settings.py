@@ -126,7 +126,9 @@ LOGIN_URL = '/login.html'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://appname.herokuapp.com'
+]
 STATIC_URL = 'static/'
 MEDIA_URL = 'img/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'pages/static'),
