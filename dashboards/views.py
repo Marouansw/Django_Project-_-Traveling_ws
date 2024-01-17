@@ -5,6 +5,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib import messages
+import sweetify
 
 
 
@@ -29,7 +30,7 @@ def users(request):
 def delete_user(request,usk):
     user = get_object_or_404(User, username=usk)
     if user.delete() :
-        messages.success(request, 'Changes Saved !!')
+        messages.success(request, ' USER DELETED !!')
         return redirect('/Users')  # Redirect to the user's profile page or another appropriate page
 
 @login_required
@@ -38,7 +39,7 @@ def update_user(request):
         form = UpdateProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Changes Saved !!')
+            messages.success(request, 'CHANGES SAVED !!')
             return redirect('/profil')  # Redirect to the user's profile page or another appropriate page
     else:
         form = UpdateProfileForm(instance=request.user)

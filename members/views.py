@@ -27,11 +27,6 @@ def register_user(request):
     return render(request,'authenticate/register.html',{'form':form,'user': request.user})
 
 
-
-
-
-
-
 def login_user(request):
     if request.user.is_authenticated:
         messages.success(request,"Already Logged in!! Logout First ")

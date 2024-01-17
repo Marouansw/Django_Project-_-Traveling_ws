@@ -30,8 +30,10 @@
                                             <td>{{u.first_name}}</td>
                                             <td>{{u.last_name}}</td>
                                             <td>{% if u.is_staff %}Admin{%else%}User{% endif %}</td>
-                                            <td><a href= "{%url 'delete_user' usk=u.username %}"><button type="button" class="btn btn-danger" onclick="ConfirmAlert()">Delete</a></button>
-                                                
+                                            <td>
+                                                <a href="#" class="delete-link" data-username="{{ u.username }}">
+                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                </a>
                                             </td>
                                         </tr>
                                         {% endfor %}
@@ -44,4 +46,45 @@
                 </div>
        
             </div>
+            <script>
+                // Add click event listener to all elements with the "delete-link" class
+                document.querySelectorAll('.delete-link').forEach(function(link) {
+                    link.addEventListener('click', function(event) {
+                        // Prevent the default action of the link (e.g., navigating to a URL)
+                        event.preventDefault();
+                        // Get the username from the "data-username" attribute
+                        var username = link.getAttribute('data-username');
+                        // Show a simple JavaScript confirmation dialog
+                        var isConfirmed = window.confirm('Are you sure you want to delete user ' + username + '?');
+            
+                        // If the user clicks OK, perform the delete action
+                        if (isConfirmed) {
+                            // Construct the URL with the username and redirect
+                            window.location.href = "/delete_user/" + username + "/";
+                        }
+                    });
+                });
+            </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
+            {% if messages %}
+            {% for message in messages  %}
+            <script>
+                Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "{{message}}",
+    showConfirmButton: false,
+    timer: 1700
+});
+            </script>
+            {% endfor %}
+            {% endif %}
+
+            {% load sweetify %}
+            {% sweetify %}
+            
+
+
+
   {% endblock %}
