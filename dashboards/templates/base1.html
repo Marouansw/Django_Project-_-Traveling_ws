@@ -27,12 +27,15 @@
     <link rel="stylesheet" href="{% static 'plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="...">
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 
 <!-- Bootstrap JavaScript and dependencies (Popper.js and jQuery) -->
     <!-- Custom CSS -->
     <link href="{% static 'csss/style.min.css' %}" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css'><link rel="stylesheet" href="{% static 'csss/style1.css' %}">
+
     
 </head>
 <body>
@@ -142,14 +145,14 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/dashboard"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/dashboard" style="text-decoration: none;"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/profil"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/profil" style="text-decoration: none;"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <span class="hide-menu">Profile</span>
@@ -157,7 +160,7 @@
                         </li>
                         {% if user.is_authenticated and user.is_staff %}
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Users"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Users" style="text-decoration: none;"
                                 aria-expanded="false">
                                 <i class="fa fa-font" aria-hidden="true"></i>
                                 <span class="hide-menu">Users</span>
@@ -165,7 +168,7 @@
                         </li>
                         {%else%}
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html" style="text-decoration: none;"
                                 aria-expanded="false">
                                 <i class="fa fa-font" aria-hidden="true"></i>
                                 <span class="hide-menu">Icon</span>
@@ -173,7 +176,7 @@
                         </li>
                         {%endif%}
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" style="text-decoration: none;"
                                 aria-expanded="false">
                                 <i class="fa fa-globe" aria-hidden="true"></i>
                                 <span class="hide-menu">Google Map</span>
@@ -181,7 +184,7 @@
                         </li>
                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/checkout"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/checkout" style="text-decoration: none;"
                                 aria-expanded="false">
                                 <i class="fas fa-shopping-cart"></i>
 
@@ -189,7 +192,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" id="logoutLink" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" style="text-decoration: none;" href="#" id="logoutLink" aria-expanded="false">
                                 <i class="fa fa-columns" aria-hidden="true"></i>
                                 <span class="hide-menu">Logout</span>
                             </a>
@@ -242,16 +245,17 @@
 <script src="{% static 'jss/custom.js' %}"></script>
 <!-- HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.min.css" rel="stylesheet">
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{% static 'plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
 
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js'></script>
+
 <!--This page JavaScript -->
 <!--chartis chart-->
  <script src="{% static 'plugins/bower_components/chartist/dist/chartist.min.js' %}"></script>
-<!-- <script src="{% static 'js/pages/dashboards/dashboard1.js' %}"></script> -->
-<!-- <script src="{% static 'plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script>  -->
+<script src="{% static 'js/pages/dashboards/dashboard1.js' %}"></script>
+<script src="{% static 'plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js' %}"></script> 
 
 <script>
   // Add click event listener to the Logout link

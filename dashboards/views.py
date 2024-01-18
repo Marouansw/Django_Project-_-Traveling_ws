@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404, render,redirect
+from django.shortcuts import get_list_or_404, get_object_or_404, render,redirect
 from django.contrib.auth.decorators import login_required
 from members.forms import UpdatePasswdForm, UpdateProfileForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib.auth.models import User
+from pages.models import Package,Flight
 from django.contrib import messages
 import sweetify
 
@@ -19,7 +20,12 @@ def profil(request):
 
 @login_required
 def checkout(request):
-    return render(request,'checkout.html')
+    packages = get_list_or_404(Package,checked_out='yes')
+    for p in packages:
+        print(p.type)
+        print(p.price)
+        print(p.country)
+    return render(request,'checkout.html',{'packages':packages})
 
 @login_required
 def users(request):

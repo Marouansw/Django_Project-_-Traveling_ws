@@ -1,0 +1,56 @@
+{% load static %}
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.css'><link rel="stylesheet" href="{% static 'css/style_r.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+{% for flight in flights %}
+<section class="itinerary" style="margin-top: 10%;margin-left: 5%;">
+
+  <div class="itinerary__section">
+    
+<!--     
+trips section:
+trips can be stacked, and the "flight path" (dotted line + circled plane) will automatically appear.
+-->
+    <div class="itinerary@trip">
+      <div class="itinerary@trip__meta">
+        <h4 class="itinerary@trip__title">{{flight.depart}} <i class="ion-android-arrow-forward"></i>{{flight.ps1}}</h4> <span class="itinerary@status itinerary@status--warning">Layover</span> <i class="ion-android-arrow-forward"></i>
+        <h4 class="itinerary@trip__title">{{flight.ps2}}</h4>
+      </div>
+      <time class="itinerary@trip__time" datatime="">Depart</time>
+      <time class="itinerary@trip__date" datatime="">{{flight.hour_d}}</time>
+    </div>
+
+    <div class="itinerary@trip itinerary@trip--layover">
+      <div class="itinerary@trip__meta">
+        <h4 class="itinerary@trip__title">{{flight.destination}}</h4>
+      </div>
+      <time class="itinerary@trip__time" datatime="" aria-hidden="true">Arrive</time>
+      <time class="itinerary@trip__date" datatime="">{{flight.hour_a}}</time>
+    </div>
+
+  </div>
+
+  <div class="itinerary__section itinerary@checkout">
+    <h1 class="itinerary@checkout__company" style="text-align: center;">{{flight.classe}}
+    <div class="itinerary@checkout__total"><span class="itinerary@checkout__offer"><strong>PRICE</strong></span>
+      <h1 class="itinerary@checkout__points">{{flight.price}}</h1>
+      <h1 class="itinerary@checkout__cost">$</h1>
+    </div>
+
+    <button class="btn btn--primary"><i class="ion-ios-cart-outline"></i> Book Now</button>
+        <div class="itinerary@menu">
+      <div class="itinerary@menu__item seat"></div>
+      <div class="itinerary@menu__item"><i class="ion-ios-briefcase"></i></div>
+      <div class="itinerary@menu__item"><i class="ion-information-circled"></i></div>
+    </div>
+  </div>
+</section>
+{% endfor %}
+<!-- partial -->
+  <script  src="{% static 'js/script_r.js' %}"></script>
+
+</body>
+</html>

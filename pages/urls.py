@@ -8,5 +8,9 @@ urlpatterns = [
     path('destination.html/', views.destination, name='destination'),
     path('package.html/', views.package, name='package'),
     path('contact.html/', views.contact, name='contact'),
+    path('Flight_result/', views.flight, name='flight'),
+    path('Flight_result/', views.flight, name='flight'),
+    path('checkout_package/<str:cntr>/', views.checkout_package, name='checkout_package'),
+
     # path('register.html/', views.register, name='contact'),
 ]
