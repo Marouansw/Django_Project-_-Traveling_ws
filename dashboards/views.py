@@ -20,12 +20,9 @@ def profil(request):
 
 @login_required
 def checkout(request):
-    packages = get_list_or_404(Package,checked_out='yes')
-    for p in packages:
-        print(p.type)
-        print(p.price)
-        print(p.country)
-    return render(request,'checkout.html',{'packages':packages})
+    packages = Package.objects.filter(checked_out='yes')
+    flights = Flight.objects.filter(checked_out='yes')
+    return render(request,'checkout.html',{'packages':packages,'flights':flights})
 
 @login_required
 def users(request):
@@ -37,8 +34,8 @@ def delete_user(request,usk):
     user = get_object_or_404(User, username=usk)
     if user.delete() :
         messages.success(request, ' USER DELETED !!')
-        return redirect('/Users')  # Redirect to the user's profile page or another appropriate page
-
+        return redirect('/Users')  
+    
 @login_required
 def update_user(request):
     if request.method == "POST":
@@ -46,7 +43,7 @@ def update_user(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'CHANGES SAVED !!')
-            return redirect('/profil')  # Redirect to the user's profile page or another appropriate page
+            return redirect('/profil')  
     else:
         form = UpdateProfileForm(instance=request.user)
 

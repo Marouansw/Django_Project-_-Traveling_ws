@@ -31,8 +31,8 @@
                                             <td>{{u.last_name}}</td>
                                             <td>{% if u.is_staff %}Admin{%else%}User{% endif %}</td>
                                             <td>
-                                                <a href="#" class="delete-link" data-username="{{ u.username }}">
-                                                    <button type="button" class="btn btn-danger">Delete</button>
+                                                <a href="#" data-username="{{ u.username }}" class="deleteButton"> 
+                                                    <button type="button" class="btn btn-danger" >Delete</button>
                                                 </a>
                                             </td>
                                         </tr>
@@ -48,22 +48,29 @@
             </div>
             <script>
                 // Add click event listener to all elements with the "delete-link" class
-                document.querySelectorAll('.delete-link').forEach(function(link) {
-                    link.addEventListener('click', function(event) {
-                        // Prevent the default action of the link (e.g., navigating to a URL)
-                        event.preventDefault();
-                        // Get the username from the "data-username" attribute
-                        var username = link.getAttribute('data-username');
-                        // Show a simple JavaScript confirmation dialog
-                        var isConfirmed = window.confirm('Are you sure you want to delete user ' + username + '?');
-            
-                        // If the user clicks OK, perform the delete action
-                        if (isConfirmed) {
-                            // Construct the URL with the username and redirect
-                            window.location.href = "/delete_user/" + username + "/";
-                        }
-                    });
-                });
+                document.querySelectorAll('.deleteButton').forEach(function(link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent the default behavior of the anchor tag
+
+      var username = link.getAttribute('data-username');
+      
+      // Show SweetAlert confirmation
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+         
+          window.location.href = '/delete_user/' + username; // Adjust the URL as needed
+        }
+      });
+    });
+  });
             </script>
 
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
@@ -75,15 +82,13 @@
     icon: "success",
     title: "{{message}}",
     showConfirmButton: false,
-    timer: 1700
+    timer: 1800
 });
             </script>
             {% endfor %}
             {% endif %}
 
-            {% load sweetify %}
-            {% sweetify %}
-            
+          
 
 
 

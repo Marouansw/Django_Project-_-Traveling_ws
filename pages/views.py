@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.template import RequestContext, loader
 from .models import Package,Flight
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import sweetify
 
@@ -40,20 +41,45 @@ def flight(request):
         depart_d = request.POST.get('depart_date')
         return_d = request.POST.get('return_date')
         # Retrieve the list of flights based on the given criteria
-        flights = get_list_or_404(Flight, depart=depart_location, destination=destination)
+        if depart_location and destination and depart_d and return_d:
+            flights = Flight.objects.filter(depart=depart_location, destination=destination)
 
         # Render the result template with the flights and dates
-        return render(request, 'Flight_result.html', {
-            'flights': flights,
-            'depart_d': depart_d,
-            'return_d': return_d,
+            if not flights:
+                return render(request, 'Flight_result.html', {
+                'depart_d': depart_d,
+                'return_d': return_d,
+                'no_flights': True,
+            })
+            return render(request, 'Flight_result.html', {
+               'flights': flights,
+               'depart_d': depart_d,
+               'return_d': return_d,
         })
+        else:
+            messages.success(request, ' Invalid form submission!')
+            return render(request, 'index.html')
+    else:
+            return render(request, 'index.html')
 
-    # Handle the case when the request method is not 'POST'
+
+    
+@login_required
+def checkout_flight(request,fid):  
+    flight = get_object_or_404(Flight,id=fid)
+    if flight.checked_out=='no':
+        flight.checked_out = 'yes'
+        flight.save()
+        sweetify.success(request,'FLIGHT ADDED TO CARD!!',button='Ok', timer=3000)
+    else:
+        sweetify.info(request, 'FLIGHT IS ALREADY ADDED TO CARD!!', button='Ok', timer=3000)
+
+    return redirect('/index.html')  # Redirect to the user's profile page or another appropriate page
+    
+
 
 def checkout_package(request,cntr):
     pack = get_object_or_404(Package, country=cntr)
-    print(pack.checked_out)
     if pack.checked_out=='no':
         pack.checked_out = 'yes'
         pack.save()

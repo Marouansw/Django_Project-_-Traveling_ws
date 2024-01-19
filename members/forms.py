@@ -19,10 +19,10 @@ class RegisterUserForm(UserCreationForm):
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
 class UpdateProfileForm(UserChangeForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    username  = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(required=False,widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    username  = forms.CharField(required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(required=False,widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = None
     class Meta:
         model = User

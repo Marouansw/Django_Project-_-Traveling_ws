@@ -3,6 +3,7 @@
 {% block title %}Checkout{% endblock %}
 {% block page %}CHECKOUT PAGE{% endblock %}
 {% block content %}
+<link rel='stylesheet' ><link rel="stylesheet" href="{% static 'csss/style1.css' %}"> 
 
 <div class="container-fluid">
   <!-- ============================================================== -->
@@ -13,13 +14,15 @@
           <div class="white-box">
                             <h3 class="box-title">YOUR ITEMS</h3>
                             <div class="ha">
+                              {%if packages%}
                             {% for p in packages %} 
                             <div class="card bg-dark mt-4">
                                 <img src="{% static 'img/' %}{{ p.image }}" class="card-img-top" >
                                 <div class="card-bodyy">
                                   <div class="text-section">
-                                    <h6 class="card-title fw-bold text-white">type: {{p.type}}</h6>
-                                    <p class="card-text text-white">{{p.discription}}hhhhhhhhhh</p>
+                                    <h5 class="card-title fw-bold text-white">type: {{p.type}}</h5>
+                                    <p class="card-text text-white">{{p.discription}}(Flight+Hotel)</p>
+                                    <p class="card-text text-white">for : {{p.date}}</p>
                                   </div>
                                   <div class="cta-section">
                                     <div class="text-white">{{p.price}}$</div>
@@ -27,7 +30,30 @@
                                   </div>
                                 </div>
                               </div>
-                              {% endfor %}</div>   
+                              {% endfor %}{%endif%}</div>  
+                              {%if flights%}
+                              {% for f in flights %}
+                              <div class="card bg-warning mt-4">
+                                <img src="{% static 'img/' %}{{ f.image }}"class="card-img-top" alt="...">
+                                <div class="card-bodyy">
+                                  <div class="text-section">
+                                    <h5 class="card-title fw-bold">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card's content.</p>
+                                  </div>
+                                  <div class="cta-section">
+                                    <div>$129.00</div>
+                                    <a href="#" class="btn btn-dark">Buy Now</a>
+                                  </div>
+                                </div>
+                              </div>
+                              {%endfor %}
+                              {% endif%}
+                              {%if packages or flight%}
+                              <button type="button" class="btn btn-success" >Validate Checkout</button>
+                              {%else%}
+                              <h1>NOTHING TO SHOW ...</h1>
+                              {%endif%}
+ 
           </div>
       </div>
   </div>

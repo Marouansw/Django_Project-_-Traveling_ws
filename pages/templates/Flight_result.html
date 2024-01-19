@@ -5,6 +5,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
+{% if flights %}
 {% for flight in flights %}
 <section class="itinerary" style="margin-top: 10%;margin-left: 5%;">
 
@@ -39,8 +40,9 @@ trips can be stacked, and the "flight path" (dotted line + circled plane) will a
       <h1 class="itinerary@checkout__points">{{flight.price}}</h1>
       <h1 class="itinerary@checkout__cost">$</h1>
     </div>
-
+    <a href="#" class="book-flight" data-flight="{{ flight.id }}">
     <button class="btn btn--primary"><i class="ion-ios-cart-outline"></i> Book Now</button>
+    </a>
         <div class="itinerary@menu">
       <div class="itinerary@menu__item seat"></div>
       <div class="itinerary@menu__item"><i class="ion-ios-briefcase"></i></div>
@@ -49,7 +51,37 @@ trips can be stacked, and the "flight path" (dotted line + circled plane) will a
   </div>
 </section>
 {% endfor %}
+{% else %}<p>no flights</p>
+{% endif%}
 <!-- partial -->
+<script>
+  // Add click event listener to all elements with the "delete-link" class
+  document.querySelectorAll('.book-flight').forEach(function(link) {
+link.addEventListener('click', function (event) {
+event.preventDefault(); // Prevent the default behavior of the anchor tag
+
+var flight = link.getAttribute('data-flight');
+
+// Show SweetAlert confirmation
+Swal.fire({
+title: 'Are you sure?',
+text: 'You won\'t be able to revert this!',
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#4BB5C1',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Yes, Book flight!'
+}).then((result) => {
+if (result.isConfirmed) {
+window.location.href = '/checkout_flight/' + flight; // Adjust the URL as needed
+}
+});
+});
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
+
   <script  src="{% static 'js/script_r.js' %}"></script>
 
 </body>
