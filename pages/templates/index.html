@@ -286,46 +286,29 @@
             </div>
             
             <div class="row">
-                {% for p in package %}
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="{% static 'img/' %}{{ p.image }}" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{p.country}}</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>{{p.date}}</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>{{p.personce}}</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">{{p.description}}</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <!-- <h6><a href="" id="bookLink"><strong>BOOK</strong></a></h6> -->
-                                    <a href="#" class="book-link" data-country="{{ p.country }}">
-                                        <button type="button" class="btn btn-primary">BOOK</button>
-                                    </a>
-                                    
-<!-- Bootstrap warning alert (hidden by default) -->
-
-
-<!-- JavaScript to handle the alert -->
-
-                                    <h5 class="m-0">{{p.price}}$</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="body">
+                    <main class="page-contento">
+                {% for p in package|slice:":3" %}
+                <div class="cardo" style="position: relative; background-image: url('../static/img/{{p.image}}'); background-size: cover; background-repeat: no-repeat;">
+                    <div class="contento">
+                    <h2 class="titlee" style="color: white;">{{p.country}}</h2>
+                    <p class="copy">{{p.discription}}</p><p class="copy"><strong>{{p.personce}}</strong> Persons --> {{p.date}}</p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only {{p.price}} $</strong></h3></p>
+                    
+                  </div>
                 </div>
                {% endfor %}
+
+            </main>
+        </div>
+
             </div>
         </div>
-    </div>
+    </div>        <h2 style="text-align: center;"><strong>Book and See</strong> all packages .. <a href="/package.html">HERE</a></h2>
+
     <!-- Packages End -->
 
 
-    <!-- Registration Start -->
-   
-    <!-- Registration End -->
+    
 
 
     <!-- Team Start -->

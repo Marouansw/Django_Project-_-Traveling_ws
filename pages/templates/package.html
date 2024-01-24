@@ -23,87 +23,93 @@
     <div class="container-fluid booking mt-5 pb-5">
         <div class="container pb-5">
             <div class="bg-light shadow" style="padding: 30px;">
-                <div class="row align-items-center" style="min-height: 60px;">
+                <form method="post" action="{% url 'flight' %}">
+                    {% csrf_token %}
+                    <div class="row align-items-center" style="min-height: 60px;">
                     <div class="col-md-10">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>Destination</option>
-                                        <option value="1">Destination 1</option>
-                                        <option value="2">Destination 1</option>
-                                        <option value="3">Destination 1</option>
+                                    <select name="depart" class="custom-select px-4" style="height: 47px;">
+                                        <option selected>DEPART</option>
+                                        <option value="BARCELONA">BARCELONA</option>
+                                        <option value="ITALY">ITALY</option>
+                                        <option value="SINGAPOUR">SINGAPOUR</option>
+                                        <option value="NEW YORK">NEW YORK</option>
+                                        <option value="DUBAI">DUBAI</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
+                                    <select name="destination" class="custom-select px-4" style="height: 47px;">
+                                        <option selected>DESTINATION</option>
+                                        <option value="PARIS">PARIS</option>
+                                        <option value="LOS ANGELES">LOS ANGELES</option>
+                                        <option value="NEW ZEALAND">NEW ZEALAND</option>
+                                        <option value="JAPAN">JAPAN</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <div class="mb-3 mb-md-0">
                                     <div class="date" id="date1" data-target-input="nearest">
-                                        <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Depart Date" data-target="#date1" data-toggle="datetimepicker"/>
+                                        <input type="text" name="depart_date" class="form-control p-4 datetimepicker-input" placeholder="Depart Date" data-target="#date1" data-toggle="datetimepicker"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="mb-3 mb-md-0">
                                     <div class="date" id="date2" data-target-input="nearest">
-                                        <input type="text" class="form-control p-4 datetimepicker-input" placeholder="Return Date" data-target="#date2" data-toggle="datetimepicker"/>
+                                        <input type="text" name="return_date" class="form-control p-4 datetimepicker-input" placeholder="Return Date" data-target="#date2" data-toggle="datetimepicker"/>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mb-3 mb-md-0">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>Duration</option>
-                                        <option value="1">Duration 1</option>
-                                        <option value="2">Duration 1</option>
-                                        <option value="3">Duration 1</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                       <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
     <!-- Booking End -->
 
 
+
+
+
+
+
+
     <!-- Packages Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid py-5" >
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
                 <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
                 <h1> Tour Packages</h1>
             </div>
     <div class="row">
+        <div class="body">
+            <main class="page-contento">
         {% for p in package %}
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="package-item bg-white mb-2">
-                <img class="img-fluid" src="{% static 'img/' %}{{ p.image }}" alt="">
-                <div class="p-4">
-                    <div class="d-flex justify-content-between mb-3">
-                        <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{p.country}}</small>
-                        <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>{{p.date}}</small>
-                        <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>{{p.personce}}</small>
-                    </div>
-                    <a class="h5 text-decoration-none" href="">{{p.description}}</a>
-                    <div class="border-top mt-4 pt-4">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                            <h6><a href="#" id="bookLink"><strong>BOOK</strong></a></h6>
-
-
-                            <h5 class="m-0">{{p.price}}$</h5>
-                        </div>
-                    </div>
+      
+                <div class="cardo" style="position: relative; background-image: url(' /static/img/{{p.image}} '); background-size: cover; background-repeat: no-repeat;">
+                    <div class="contento">
+                    <h2 class="titlee" style="color: white;">{{p.country}}</h2>
+                    <p class="copy">{{p.discription}}</p><p class="copy"><strong>{{p.personce}}</strong> Persons --> {{p.date}}</p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only {{p.price}} $</strong></h3></p>
+                    <a href="#" class="book-link" data-country="{{ p.country }}">
+                    <button class="btnn">BOOK</button>
+                    </a>
+                  </div>
                 </div>
-            </div>
-        </div>
+           
        {% endfor %}
+    </main>
+</div>
     </div>
 </div>
 </div>

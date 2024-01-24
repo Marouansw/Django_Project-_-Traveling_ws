@@ -143,6 +143,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <!-- User Profile-->
+                        {% if user.is_authenticated and user.is_staff %}
                         <li class="sidebar-item pt-2">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/dashboard" style="text-decoration: none;"
                                 aria-expanded="false">
@@ -150,6 +151,7 @@
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
+                        {% endif%}
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/profil" style="text-decoration: none;"
                                 aria-expanded="false">
@@ -161,27 +163,26 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Users" style="text-decoration: none;"
                                 aria-expanded="false">
-                                <i class="fa fa-font" aria-hidden="true"></i>
+                                <i class="fa fa-users" aria-hidden="true"></i>
                                 <span class="hide-menu">Users</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/add_flight" style="text-decoration: none;"
+                                aria-expanded="false">
+                                <i class="fa fa-plane" aria-hidden="true"></i>
+                                <span class="hide-menu">Flights</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Pack" style="text-decoration: none;"
+                                aria-expanded="false">
+                                <i class='fas fa-box-open'></i>
+                                <span class="hide-menu">Packages</span>
+                            </a>
+                        </li>
                         {%else%}
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html" style="text-decoration: none;"
-                                aria-expanded="false">
-                                <i class="fa fa-font" aria-hidden="true"></i>
-                                <span class="hide-menu">Icon</span>
-                            </a>
-                        </li>
-                        {%endif%}
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="map-google.html" style="text-decoration: none;"
-                                aria-expanded="false">
-                                <i class="fa fa-globe" aria-hidden="true"></i>
-                                <span class="hide-menu">Google Map</span>
-                            </a>
-                        </li>
-                       
+                      
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/checkout" style="text-decoration: none;"
                                 aria-expanded="false">
@@ -190,6 +191,8 @@
                                 <span class="hide-menu">Checkout</span>
                             </a>
                         </li>
+                        {%endif%}
+
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" style="text-decoration: none;" href="#" id="logoutLink" aria-expanded="false">
                                 <i class="fa fa-columns" aria-hidden="true"></i>

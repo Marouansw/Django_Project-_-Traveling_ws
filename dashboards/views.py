@@ -13,15 +13,16 @@ import sweetify
 # Create your views here.
 @login_required
 def dashboard(request):
-    return render(request,'dashboard.html')
+    users = User.objects.all()
+    return render(request,'dashboard.html',{'users':users})
 @login_required
 def profil(request):
     return render(request,'profile.html')
 
 @login_required
 def checkout(request):
-    packages = Package.objects.filter(checked_out='yes')
-    flights = Flight.objects.filter(checked_out='yes')
+    packages = Package.objects.filter(checked_out_by=request.user)
+    flights = Flight.objects.filter(checked_out_by=request.user)
     return render(request,'checkout.html',{'packages':packages,'flights':flights})
 
 @login_required
@@ -65,5 +66,25 @@ def update_pwd(request):
         'form': form
     })
 
+@login_required
+def add_flight(request):
+    if request.method == 'POST':
+            new_flight = Flight(
+                depart=request.POST['depart'],
+                ps1=request.POST['ps1'],
+                ps2=request.POST['ps2'],
+                hour_d=request.POST['hour_d'],
+                destination=request.POST['destination'],
+                hour_a=request.POST['hour_a'],
+                price=request.POST['price'],
+                classe =request.POST['class'],
+            )
+            new_flight.save()
+            messages.success(request,'FLIGHT ADDED SUCCESSFULLY !!')
+            return redirect('/add_flight')
+    return render(request, 'add_flight.html')
 
-   
+
+@login_required
+def add_pack(request):
+    return render(request,'add_package.html')
