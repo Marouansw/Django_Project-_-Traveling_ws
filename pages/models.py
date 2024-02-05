@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Package(models.Model):
- country=models.CharField(max_length=50)
- discription=models.CharField(max_length=300,blank=True)
- image=models.CharField(max_length=300,blank=True)
+ id = models.AutoField(primary_key=True)
+ country=models.CharField(max_length=100)
+ discription=models.CharField(max_length=500,blank=True)
+ image=models.CharField(max_length=100,blank=True)
  date = models.CharField(max_length=300,blank=True)
  price=models.IntegerField(default=0)
  personce=models.IntegerField(default=0)

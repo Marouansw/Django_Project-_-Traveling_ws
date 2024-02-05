@@ -212,6 +212,32 @@
         });
     });
 </script>
+<script>
+    // Add click event listener to all elements with the "delete-link" class
+    document.querySelectorAll('.delete-link').forEach(function(link) {
+    link.addEventListener('click', function (event) {
+    event.preventDefault(); 
+  
+    var id = link.getAttribute('data-id');
+  
+  // Show SweetAlert confirmation
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'You won\'t be able to revert this!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#4BB5C1',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Delete package!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+        window.location.href = '/delete_package/' + id; 
+    }
+    });
+    });
+  });
+    
+  </script>
 
 
 <!-- Include SweetAlert library -->

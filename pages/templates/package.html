@@ -101,8 +101,13 @@
                     <div class="contento">
                     <h2 class="titlee" style="color: white;">{{p.country}}</h2>
                     <p class="copy">{{p.discription}}</p><p class="copy"><strong>{{p.personce}}</strong> Persons --> {{p.date}}</p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only {{p.price}} $</strong></h3></p>
+                    {% if user.is_authenticated and not user.is_staff %}
                     <a href="#" class="book-link" data-country="{{ p.country }}">
-                    <button class="btnn">BOOK</button>
+                   <button class="btnn">BOOK</button>
+                   {%else%}
+                   <a href="#" class="delete-link" data-id="{{ p.id }}">
+                   <button class="btnn">Delete</button>
+                   {%endif %}
                     </a>
                   </div>
                 </div>

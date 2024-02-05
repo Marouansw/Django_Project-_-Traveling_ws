@@ -20,8 +20,9 @@
                                 <div class="body">
                                     <main class="page-contento">
                               <form action="" method="post">
-                                        <div class="cardo" style="position: relative; background-image: url('/static/img/is.jpg'); background-size: cover; background-repeat: no-repeat;">
-                                            <div class="contento">Enter the picture's name carefully after placing it in a static directory<input type="text"  style="width: 140px;border-radius:4.5px;" placeholder="image.jpg" name="image">
+                                {% csrf_token %}
+                                        <div class="cardo" style="position: relative; background-image: url('/static/img/is.jpg'); background-size: cover; background-repeat: no-repeat;margin-left: 85%;">
+                                            <div class="contento">Enter the picture's name carefully after placing it in a static directory<input type="text"  style="width: 140px;border-radius:4.5px;" placeholder="image.extension" name="image">
                                             <h2 class="titlee" style="color: white;"><input type="text"  style="width: 140px;border-radius:4.5px;" placeholder="Pack's country" name="country"></h2>
                                             <p class="copy"><input type="text"  style="width: 170px;height:80px ;border-radius:4.5px;" placeholder="Description" name="description"></p><p class="copy"><strong><input type="text"  style="width: 62px;border-radius:4.5px;" placeholder="nb" name="nb"></strong> Persons --> <input type="text"  style="width: 62px;border-radius:4.5px;" placeholder="period" name="period"></p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only <input type="text"  style="width: 62px;border-radius:4.5px;" placeholder="price" name="price"> $</strong></h3></p>
                                             <button class="btnn" type="submit">ADD</button>

@@ -13,7 +13,7 @@ urlpatterns =[
     path('Users/', views.users, name='check'),
     path('delete_user/<str:usk>/', views.delete_user, name='delete_user'),
     path('add_flight/', views.add_flight, name='check'),
-    path('Pack/', views.add_pack, name='pack'),
+    path('add_pack/', views.add_pack, name='pack'),
     # path('delete_user/', views.users, name='delete'),
 
 

@@ -29,10 +29,30 @@ def service(request):
 def destination(request):
     return render(request,'destination.html')
 
-
+@login_required
 def package(request):
     package = Package.objects.all()
     return render(request,'package.html',{'package':package})
+
+@login_required
+def checkout_package(request,cntr):
+    pack = get_object_or_404(Package, country=cntr)
+    if request.user in pack.checked_out_by.all():
+        sweetify.info(request, 'PACKAGE IS ALREADY ADDED TO CARD!!', button='Ok', timer=3000)
+    else:
+        pack.checked_out_by.add(request.user)
+        pack.save()
+        sweetify.success(request,'PACKAGE ADDED TO CARD!!',button='Ok', timer=3000)
+
+    return redirect('/index.html')  
+
+@login_required
+def delete_package(request,id):
+    pack = Package.objects.filter(id=id)
+    if pack.delete() :
+        sweetify.success(request, ' PACKAGE DELETED !!')
+        return redirect('/package.html')  
+
 
 
 def flight(request):
@@ -41,17 +61,8 @@ def flight(request):
         destination = request.POST.get('destination')
         depart_d = request.POST.get('depart_date')
         return_d = request.POST.get('return_date')
-        # Retrieve the list of flights based on the given criteria
         if depart_location and destination and depart_d and return_d:
             flights = Flight.objects.filter(depart=depart_location, destination=destination)
-
-        # Render the result template with the flights and dates
-            if not flights:
-                return render(request, 'Flight_result.html', {
-                'depart_d': depart_d,
-                'return_d': return_d,
-                'no_flights': True,
-            })
             return render(request, 'Flight_result.html', {
                'flights': flights,
                'depart_d': depart_d,
@@ -62,8 +73,6 @@ def flight(request):
             return render(request, 'index.html')
     else:
             return render(request, 'index.html')
-
-
     
 @login_required
 def checkout_flight(request,fid):  
@@ -79,17 +88,11 @@ def checkout_flight(request,fid):
     
 
 @login_required
-def checkout_package(request,cntr):
-    pack = get_object_or_404(Package, country=cntr)
-    if request.user in pack.checked_out_by.all():
-        sweetify.info(request, 'PACKAGE IS ALREADY ADDED TO CARD!!', button='Ok', timer=3000)
-    else:
-        pack.checked_out_by.add(request.user)
-        pack.save()
-        sweetify.success(request,'PACKAGE ADDED TO CARD!!',button='Ok', timer=3000)
-
-    return redirect('/index.html')  # Redirect to the user's profile page or another appropriate page
-    
+def delete_flight(request,id):
+    flight = Flight.objects.filter(id=id)
+    if flight.delete() :
+        sweetify.success(request, ' FLIGHT DELETED !!')
+        return redirect('/index.html')  
 
 
 def contact(request):

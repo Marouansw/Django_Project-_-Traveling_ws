@@ -1,7 +1,6 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render,redirect
 from django.contrib.auth.decorators import login_required
 from members.forms import UpdatePasswdForm, UpdateProfileForm
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib.auth.models import User
 from pages.models import Package,Flight
@@ -55,7 +54,7 @@ def update_pwd(request):
         form = UpdatePasswdForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important!
+            update_session_auth_hash(request, user)  # Imptnt!
             messages.success(request, 'Your password was successfully updated!')
             return redirect('/profil')
         else:
@@ -87,4 +86,16 @@ def add_flight(request):
 
 @login_required
 def add_pack(request):
-    return render(request,'add_package.html')
+    if request.method == 'POST':
+            new_Pack = Package(
+                country=request.POST['country'],
+                discription=request.POST['description'],
+                image=request.POST['image'],
+                date=request.POST['period'],
+                price=request.POST['price'],
+                personce=request.POST['nb'],
+            )
+            new_Pack.save()
+            messages.success(request,'PACKAGE ADDED SUCCESSFULLY !!')
+            return redirect('/add_pack')
+    return render(request, 'add_package.html')
