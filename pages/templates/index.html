@@ -55,11 +55,9 @@
                                 <div class="mb-3 mb-md-0">
                                     <select name="depart" class="custom-select px-4" style="height: 47px;">
                                         <option selected>DEPART</option>
-                                        <option value="BARCELONA">BARCELONA</option>
-                                        <option value="ITALY">ITALY</option>
-                                        <option value="SINGAPOUR">SINGAPOUR</option>
-                                        <option value="NEW YORK">NEW YORK</option>
-                                        <option value="DUBAI">DUBAI</option>
+                                        {% for depart in depart_list %}
+                                        <option value="{{ depart }}">{{ depart }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -67,10 +65,9 @@
                                 <div class="mb-3 mb-md-0">
                                     <select name="destination" class="custom-select px-4" style="height: 47px;">
                                         <option selected>DESTINATION</option>
-                                        <option value="PARIS">PARIS</option>
-                                        <option value="LOS ANGELES">LOS ANGELES</option>
-                                        <option value="NEW ZEALAND">NEW ZEALAND</option>
-                                        <option value="JAPAN">JAPAN</option>
+                                        {% for destination in destination_list %}
+                                        <option value="{{ destination }}">{{ destination }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -92,7 +89,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                       <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                       <button class="btn btn-dark btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
                     </div>
                 </div>
                 </form>
@@ -113,7 +110,7 @@
                 </div>
                 <div class="col-lg-6 pt-5 pb-lg-5">
                     <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
-                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Us</h6>
+                        <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">About Us</h6>
                         <h1 class="mb-3">We Provide Best Tour Packages In Your Budget</h1>
                         <div class="row mb-4">
                             <div class="col-6">
@@ -137,7 +134,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="d-flex mb-4 mb-lg-0">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3" style="height: 100px; width: 100px;">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-dark mr-3" style="height: 100px; width: 100px;">
                             <i class="fa fa-2x fa-money-check-alt text-white"></i>
                         </div>
                         <div class="d-flex flex-column">
@@ -148,7 +145,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-flex mb-4 mb-lg-0">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3" style="height: 100px; width: 100px;">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-dark mr-3" style="height: 100px; width: 100px;">
                             <i class="fa fa-2x fa-award text-white"></i>
                         </div>
                         <div class="d-flex flex-column">
@@ -159,7 +156,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="d-flex mb-4 mb-lg-0">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary mr-3" style="height: 100px; width: 100px;">
+                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-dark mr-3" style="height: 100px; width: 100px;">
                             <i class="fa fa-2x fa-globe text-white" ></i>
                         </div>
                         <div class="d-flex flex-column">
@@ -178,7 +175,7 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Destination</h6>
                 <h1>Explore Top Destination</h1>
             </div>
             <div class="row">
@@ -246,7 +243,7 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Services</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Services</h6>
                 <h1>Tours & Travel Services</h1>
             </div>
             <div class="row">
@@ -281,7 +278,7 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Packages</h6>
                 <h1>Pefect Tour Packages</h1>
             </div>
             
@@ -289,7 +286,7 @@
                 <div class="body">
                     <main class="page-contento">
                 {% for p in package|slice:":3" %}
-                <div class="cardo" style="position: relative; background-image: url('../static/img/{{p.image}}'); background-size: cover; background-repeat: no-repeat;">
+                <div class="cardo" style="position: relative; background-image: url('{{p.pack_image.url}}'); background-size: cover; background-repeat: no-repeat;">
                     <div class="contento">
                     <h2 class="titlee" style="color: white;">{{p.country}}</h2>
                     <p class="copy">{{p.discription}}</p><p class="copy"><strong>{{p.personce}}</strong> Persons --> {{p.date}}</p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only {{p.price}} $</strong></h3></p>
@@ -303,7 +300,7 @@
 
             </div>
         </div>
-    </div>        <h2 style="text-align: center;"><strong>Book and See</strong> all packages .. <a href="/package.html">HERE</a></h2>
+    </div>        <h2 style="text-align: center;"><strong>Book and See</strong> all packages .. <a href="/package.html" style="color: #17a2b8;">HERE</a></h2>
 
     <!-- Packages End -->
 
@@ -315,7 +312,7 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Guides</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Guides</h6>
                 <h1>Our Travel Guides</h1>
             </div>
             <div class="row">
@@ -325,10 +322,10 @@
                         <div class="team-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{%static 'img/123.jpg' %}" alt="">
                             <div class="team-social">
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -342,10 +339,10 @@
                         <div class="team-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{%static 'img/team-3.jpg' %}" alt="">
                             <div class="team-social">
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -359,10 +356,10 @@
                         <div class="team-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="{%static 'img/ha.jpg' %}" alt="">
                             <div class="team-social">
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-outline-info btn-square" href=""><i class="fab fa-linkedin-in"></i></a>
                             </div>
                         </div>
                         <div class="text-center py-4">
@@ -381,7 +378,7 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
                 <h1>What Say Our Clients</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">
@@ -431,7 +428,7 @@
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Blog</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Our Blog</h6>
                 <h1>Latest From Our Blog</h1>
             </div>
             <div class="row pb-3">
@@ -446,9 +443,9 @@
                         </div>
                         <div class="bg-white p-4">
                             <div class="d-flex mb-2">
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Admin</a>
-                                <span class="text-primary px-2">|</span>
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Tours & Travel</a>
+                                <a class="text-info text-uppercase text-decoration-none" href="">Admin</a>
+                                <span class="text-info px-2">|</span>
+                                <a class="text-info text-uppercase text-decoration-none" href="">Tours & Travel</a>
                             </div>
                             <a class="h5 m-0 text-decoration-none" href="">Dolor justo sea kasd lorem clita justo diam amet</a>
                         </div>
@@ -465,9 +462,9 @@
                         </div>
                         <div class="bg-white p-4">
                             <div class="d-flex mb-2">
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Admin</a>
-                                <span class="text-primary px-2">|</span>
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Tours & Travel</a>
+                                <a class="text-info text-uppercase text-decoration-none" href="">Admin</a>
+                                <span class="text-info px-2">|</span>
+                                <a class="text-info text-uppercase text-decoration-none" href="">Tours & Travel</a>
                             </div>
                             <a class="h5 m-0 text-decoration-none" href="">Dolor justo sea kasd lorem clita justo diam amet</a>
                         </div>
@@ -484,9 +481,9 @@
                         </div>
                         <div class="bg-white p-4">
                             <div class="d-flex mb-2">
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Admin</a>
-                                <span class="text-primary px-2">|</span>
-                                <a class="text-primary text-uppercase text-decoration-none" href="">Tours & Travel</a>
+                                <a class="text-info text-uppercase text-decoration-none" href="">Admin</a>
+                                <span class="text-info px-2">|</span>
+                                <a class="text-info text-uppercase text-decoration-none" href="">Tours & Travel</a>
                             </div>
                             <a class="h5 m-0 text-decoration-none" href="">Dolor justo sea kasd lorem clita justo diam amet</a>
                         </div>
@@ -497,6 +494,6 @@
     </div>
     <!-- Blog End -->
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-lg btn-info btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 {% endblock %}

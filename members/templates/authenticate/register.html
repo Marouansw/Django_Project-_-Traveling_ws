@@ -3,8 +3,27 @@
 {% block title %}Sign Up{% endblock %}
 {% block navbar %}{% endblock %}
 {% block content %}
+<style>
+  body {
+    
+    background-image: url('{% static "img/switt.jpg" %}');
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; 
+    height: 145vh; /* Set the body height to cover the entire viewport */
+  }
+  label{
+    color: white;
+  }
+  .helptext{
+    color: white;
+  }
+  li{
+    color: white;
+  }
+</style>
 {% if form.errors %}
-<div  src="{% static 'img/photo-1476514525535-07fb3b4ae5f1.avif' %}" >
+<!-- <div  src="{% static 'img/photo-1476514525535-07fb3b4ae5f1.avif' %}" > -->
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Attention!</strong> There was an error with your form
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -12,15 +31,15 @@
     </button>
   </div>
   {% endif %}
-<div style="background-color: #eee;">
+<!-- <div style="background-color: #eee;"> -->
 <!-- <div class="mb-3"> -->
-<div class="w-50 p-3" style="background-color: #ffffff;margin-left: 25%;">
+<div class="w-50 p-3" style="margin-left: 26%;margin-top:10px ;">
 <h2 style="text-align: center;"><strong>SIGN UP</strong></h2>
-<form method="post" action="" style="margin-top:25px;">
+<form method="post" action="" style="margin-top:25px;margin-bottom: 0;">
     {% csrf_token %}
     {{ form.as_p }}
-    <h6 style="text-align: right;">Back<a href="/index.html"> Home</a></h6>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <h5 style="text-align: right;color: black;"><strong>Back <a href="/index.html" style="color:white;">Home</a></h5></strong>
+    <button class="btn btn-dark"  style="margin-top: 0px;width: 100px;" type="submit">Submit</button>
 </form>
 
 
@@ -32,5 +51,4 @@
 {% endblock %}
 {% block footer%}
 {% endblock %}
-
 

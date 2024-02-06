@@ -5,12 +5,12 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'csss/style1.css' %}"> 
 
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: white;">
   <!-- ============================================================== -->
   <!-- Start Page Content -->
   <!-- ============================================================== -->
-  <div class="row">
-      <div class="col-sm-12">
+  <div class="row" >
+      <div class="col-sm-12" >
           <div class="white-box" style="background-color: #000000;">
                             <h3 class="box-title"style="color: #fff;">YOUR ITEMS</h3>
                             {% for p in packages%}
@@ -72,7 +72,8 @@
                                 </div></div></section>
                                 {%endfor%}
                               {%if packages or flight%}
-                              <button type="button" class="btn btn-success" >Validate Checkout</button>
+                              <a href="/paiment">
+                              <button type="button" class="btn btn-success" >Validate Checkout</button></a>
                               {%else%}
                               <h1>NOTHING TO SHOW ...</h1>
                               {%endif%}

@@ -30,11 +30,9 @@
                                 <div class="mb-3 mb-md-0">
                                     <select name="depart" class="custom-select px-4" style="height: 47px;">
                                         <option selected>DEPART</option>
-                                        <option value="BARCELONA">BARCELONA</option>
-                                        <option value="ITALY">ITALY</option>
-                                        <option value="SINGAPOUR">SINGAPOUR</option>
-                                        <option value="NEW YORK">NEW YORK</option>
-                                        <option value="DUBAI">DUBAI</option>
+                                        {% for depart in depart_list %}
+                                        <option value="{{ depart }}">{{ depart }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -42,10 +40,9 @@
                                 <div class="mb-3 mb-md-0">
                                     <select name="destination" class="custom-select px-4" style="height: 47px;">
                                         <option selected>DESTINATION</option>
-                                        <option value="PARIS">PARIS</option>
-                                        <option value="LOS ANGELES">LOS ANGELES</option>
-                                        <option value="NEW ZEALAND">NEW ZEALAND</option>
-                                        <option value="JAPAN">JAPAN</option>
+                                        {% for destination in destination_list %}
+                                        <option value="{{ destination }}">{{ destination }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -67,7 +64,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                       <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                       <button class="btn btn-dark btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
                     </div>
                 </div>
                 </form>
@@ -81,7 +78,7 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Contact</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Contact</h6>
                 <h1>Contact For Any Query</h1>
             </div>
             <div class="row justify-content-center">
@@ -113,7 +110,7 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-primary py-3 px-4" type="submit" id="sendMessageButton">Send Message</button>
+                                <button class="btn btn-info py-3 px-4" type="submit" id="sendMessageButton">Send Message</button>
                             </div>
                         </form>
                     </div>

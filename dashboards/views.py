@@ -114,3 +114,17 @@ def delete_pack_from_check(request,id):
     return redirect('/checkout')
 
 
+
+# @user_passes_test(is_regular_user)
+def paiment(request):
+    user = request.user
+    if request.method == 'POST':
+        packages_to_update = Package.objects.filter(checked_out_by=user)
+        for package in packages_to_update:
+            package.checked_out_by.remove(user)
+        flights_to_update = Flight.objects.filter(checked_out_by=user)
+        for flight in flights_to_update:
+            flight.checked_out_by.remove(user)    
+        messages.success(request, 'CHECKOUT VALIDATED !!')
+        return redirect('/checkout')
+    return render(request,"paiment.html")

@@ -32,11 +32,9 @@
                                 <div class="mb-3 mb-md-0">
                                     <select name="depart" class="custom-select px-4" style="height: 47px;">
                                         <option selected>DEPART</option>
-                                        <option value="BARCELONA">BARCELONA</option>
-                                        <option value="ITALY">ITALY</option>
-                                        <option value="SINGAPOUR">SINGAPOUR</option>
-                                        <option value="NEW YORK">NEW YORK</option>
-                                        <option value="DUBAI">DUBAI</option>
+                                        {% for depart in depart_list %}
+                                        <option value="{{ depart }}">{{ depart }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -44,10 +42,9 @@
                                 <div class="mb-3 mb-md-0">
                                     <select name="destination" class="custom-select px-4" style="height: 47px;">
                                         <option selected>DESTINATION</option>
-                                        <option value="PARIS">PARIS</option>
-                                        <option value="LOS ANGELES">LOS ANGELES</option>
-                                        <option value="NEW ZEALAND">NEW ZEALAND</option>
-                                        <option value="JAPAN">JAPAN</option>
+                                        {% for destination in destination_list %}
+                                        <option value="{{ destination }}">{{ destination }}</option>
+                                    {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -69,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                       <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                       <button class="btn btn-dark btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
                     </div>
                 </div>
                 </form>
@@ -89,7 +86,7 @@
     <div class="container-fluid py-5" >
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
+                <h6 class="text-info text-uppercase" style="letter-spacing: 5px;">Packages</h6>
                 <h1> Tour Packages</h1>
             </div>
     <div class="row">
@@ -108,7 +105,7 @@
                     <p class="copy">{{p.discription}}</p><p class="copy"><strong>{{p.personce}}</strong> Persons --> {{p.date}}</p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only {{p.price}} $</strong></h3></p>
                     {% if user.is_authenticated and not user.is_staff %}
                     <a href="#" class="book-link" data-country="{{ p.country }}">
-                   <button class="btnn">BOOK</button>
+                   <button class="btnn">BOOK</button></a>
                    {%else%}
                    <a href="#" class="delete-link" data-id="{{ p.id }}">
                    <button class="btnn">Delete</button>
@@ -131,6 +128,6 @@
 
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-lg btn-info btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 {% endblock %}

@@ -28,6 +28,9 @@
 <!-- CARDS PACKAGES -->
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> -->
     <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+    <style>
+
+    </style>
     
 
 
@@ -67,14 +70,15 @@
                               </svg>
                               <a href="#"  data-toggle="dropdown" style="color: black; text-decoration: none;"><strong>{{user}} </strong></a>
                               <div class="dropdown-menu border-0 rounded-0 m-0" >
-                                <a href="/dashboard" class="dropdown-item" style="color: black;background-color: white;">DASHBOARD</a>
+                                {% if user.is_staff %}<a href="/dashboard" class="dropdown-item" style="color: black;background-color: white;">DASHBOARD</a>
+                                {% else %}<a href="/profil" class="dropdown-item" style="color: black;background-color: white;">DASHBOARD</a>{% endif %}
                                 <a href="/logout" class="dropdown-item" style="color: white;background-color: black;">LOGOUT</a>
                               </div>
                         </span>
                                                 
                         {% else %}
                         <a href="/login.html">
-                            <button type="button" class="btn btn-primary" style="border-radius: 0.75em; margin-left: 440px;width: 130px;height: 50px;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">LOGIN</button>
+                            <button type="button" class="btn btn-dark" style="border-radius: 0.75em; margin-left: 440px;width: 130px;height: 50px;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">LOGIN</button>
                         </a>
                         {% endif %}
                     </div>
@@ -87,7 +91,7 @@
         <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
             <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5" >
                 <a href="/index.html" class="navbar-brand" >
-                    <h1 class="m-0 text-primary"><span class="text-dark">TRAVEL</span>ER</h1>
+                    <h1 class="m-0 text-info"><span class="text-dark">TRAVEL</span>ER</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -116,15 +120,15 @@
         <div class="row pt-5">
             <div class="col-lg-3 col-md-6 mb-5">
                 <a href="" class="navbar-brand">
-                    <h1 class="text-primary"><span class="text-white">TRAVEL</span>ER</h1>
+                    <h1 class="text-info"><span class="text-white">TRAVEL</span>ER</h1>
                 </a>
                 <p>Sed ipsum clita tempor ipsum ipsum amet sit ipsum lorem amet labore rebum lorem ipsum dolor. No sed vero lorem dolor dolor</p>
                 <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Follow Us</h6>
                 <div class="d-flex justify-content-start">
-                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-outline-info btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-info btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-info btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-info btn-square" href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5" style="margin-left:15% ;">
@@ -149,7 +153,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
                         <div class="input-group-append">
-                         <button class="btn btn-primary px-3"><a href="/register.html" style="color: white;">Sign Up</a></button>
+                         <button class="btn btn-info px-3"><a href="/register.html" style="color: white;">Sign Up</a></button>
                         </div>
                     </div>
                 </div>
@@ -163,7 +167,7 @@
         </div>
     </div>
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    <a href="#" class="btn btn-lg btn-dark btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 {% endblock %}
     <!-- Footer End -->
 
@@ -194,23 +198,29 @@
       </script>
 
 <script>
-    // Add click event listener to all elements with the "delete-link" class
-    document.querySelectorAll('.book-link').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            // Prevent the default action of the link (e.g., navigating to a URL)
-            event.preventDefault();
-            // Get the username from the "data-username" attribute
-            var country = link.getAttribute('data-country');
-            // Show a simple JavaScript confirmation dialog
-            var isConfirmed = window.confirm('Are you sure you wana book this item ?');
-
-            // If the user clicks OK, perform the delete action
-            if (isConfirmed) {
-                // Construct the URL with the username and redirect
-                window.location.href = "/checkout_package/" + country + "/";
-            }
-        });
+     document.querySelectorAll('.book-link').forEach(function(link) {
+    link.addEventListener('click', function (event) {
+    event.preventDefault(); 
+  
+    var country = link.getAttribute('data-country');
+  
+  // Show SweetAlert confirmation
+    Swal.fire({
+    title: 'Are you sure?',
+    text: 'You won\'t be able to revert this!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#4BB5C1',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Delete package!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+        window.location.href = "/checkout_package/" + country + "/";
+    }
     });
+    });
+  });
+    
 </script>
 <script>
     // Add click event listener to all elements with the "delete-link" class

@@ -15,24 +15,34 @@ from members import forms
 
 def home(request):
   package = Package.objects.all()
-  return render(request,'index.html',{'package':package})
+  depart_list = Flight.objects.values_list('depart', flat=True).distinct()
+  destination_list = Flight.objects.values_list('destination', flat=True).distinct()
+  return render(request,'index.html',{'package':package,'depart_list':depart_list,'destination_list':destination_list})
 
 
 
 def about(request):
-    return render(request,'about.html')
+    depart_list = Flight.objects.values_list('depart', flat=True).distinct()
+    destination_list = Flight.objects.values_list('destination', flat=True).distinct()
+    return render(request,'about.html',{'depart_list':depart_list,'destination_list':destination_list})
 
 
 def service(request):
-    return render(request,'service.html')
+    depart_list = Flight.objects.values_list('depart', flat=True).distinct()
+    destination_list = Flight.objects.values_list('destination', flat=True).distinct()
+    return render(request,'service.html',{'depart_list':depart_list,'destination_list':destination_list})
 
 def destination(request):
-    return render(request,'destination.html')
+    depart_list = Flight.objects.values_list('depart', flat=True).distinct()
+    destination_list = Flight.objects.values_list('destination', flat=True).distinct()
+    return render(request,'destination.html',{'depart_list':depart_list,'destination_list':destination_list})
 
 @login_required
 def package(request):
     package = Package.objects.all()
-    return render(request,'package.html',{'package':package})
+    depart_list = Flight.objects.values_list('depart', flat=True).distinct()
+    destination_list = Flight.objects.values_list('destination', flat=True).distinct()
+    return render(request,'package.html',{'package':package,'depart_list':depart_list,'destination_list':destination_list})
 
 @login_required
 def checkout_package(request,cntr):
@@ -70,9 +80,9 @@ def flight(request):
         })
         else:
             messages.success(request, ' Invalid form submission!')
-            return render(request, 'index.html')
+            return redirect('/index.html')
     else:
-            return render(request, 'index.html')
+            return redirect('/index.html')
     
 @login_required
 def checkout_flight(request,fid):  
@@ -96,8 +106,9 @@ def delete_flight(request,id):
 
 
 def contact(request):
-   return render(request,'contact.html')
+    depart_list = Flight.objects.values_list('depart', flat=True).distinct()
+    destination_list = Flight.objects.values_list('destination', flat=True).distinct()
+    return render(request,'contact.html',{'depart_list':depart_list,'destination_list':destination_list})
 
 
-def register(request):
-    return render(request,'ragister.html')
+
