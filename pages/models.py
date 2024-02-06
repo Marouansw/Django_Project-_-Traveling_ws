@@ -7,12 +7,13 @@ class Package(models.Model):
  id = models.AutoField(primary_key=True)
  country=models.CharField(max_length=100)
  discription=models.CharField(max_length=500,blank=True)
- image=models.CharField(max_length=100,blank=True)
  date = models.CharField(max_length=300,blank=True)
  price=models.IntegerField(default=0)
  personce=models.IntegerField(default=0)
  checked_out_by = models.ManyToManyField(User, blank=True)  # ManyToManyField with User
  type=models.CharField(max_length=10,blank=True,default='PACKAGE')
+ pack_image = models.ImageField(null=True, blank=True, upload_to="images/")
+
  def _str_(self):
   return self.country
 # Create your models here.

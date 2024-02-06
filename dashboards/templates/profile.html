@@ -7,12 +7,20 @@
     <!-- Column -->
     <div class="col-lg-4 col-xlg-3 col-md-12">
         <div class="white-box">
-            <div class="user-bg"> <img width="100%" alt="user" src="{% static 'plugins/images/users/add.png' %}">
+            <div class="user-bg">
+                {% if user.is_authenticated and user.is_staff %}
+                <img width="100%" alt="user" src="{% static 'plugins/images/users/add.png' %}">
+                {% else %}
+                <img width="100%" alt="user" src="{% static 'plugins/images/users/goku.jpg' %}">
+                {% endif %}
                 <div class="overlay-box">
                     <div class="user-content">
-                        <a href=""><img src="{% static 'plugins/images/users/add.png' %}"
-                                class="thumb-lg img-circle" alt="img"></a>
-                        <h4 class="text-white mt-2">{{user}}</h4>
+                        <a href="">{% if user.is_authenticated and user.is_staff %}
+                            <img src="{% static 'plugins/images/users/add.png' %}" class="thumb-lg img-circle" alt="img"></a>
+                            {% else %}
+                            <img src="{% static 'plugins/images/users/goku.jpg' %}" class="thumb-lg img-circle" alt="img"></a>
+                            {% endif %}
+                            <h4 class="text-white mt-2">{{user}}</h4>
                         <h5 class="text-white mt-2">{{user.email}}</h5>
                     </div>
                 </div>

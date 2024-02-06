@@ -44,7 +44,7 @@ def checkout_package(request,cntr):
         pack.save()
         sweetify.success(request,'PACKAGE ADDED TO CARD!!',button='Ok', timer=3000)
 
-    return redirect('/index.html')  
+    return redirect('/package.html')  
 
 @login_required
 def delete_package(request,id):

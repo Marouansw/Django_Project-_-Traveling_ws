@@ -1,5 +1,5 @@
 from django.shortcuts import get_list_or_404, get_object_or_404, render,redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from members.forms import UpdatePasswdForm, UpdateProfileForm
 from django.contrib.auth import login,logout,authenticate,update_session_auth_hash
 from django.contrib.auth.models import User
@@ -8,6 +8,11 @@ from django.contrib import messages
 import sweetify
 
 
+
+
+
+def is_regular_user(user):
+    return not user.is_staff  # Allow only non-admin users
 
 # Create your views here.
 @login_required
@@ -18,7 +23,7 @@ def dashboard(request):
 def profil(request):
     return render(request,'profile.html')
 
-@login_required
+# @user_passes_test(is_regular_user)
 def checkout(request):
     packages = Package.objects.filter(checked_out_by=request.user)
     flights = Flight.objects.filter(checked_out_by=request.user)
@@ -87,15 +92,25 @@ def add_flight(request):
 @login_required
 def add_pack(request):
     if request.method == 'POST':
+            uploaded_image = request.FILES.get('image')
             new_Pack = Package(
                 country=request.POST['country'],
                 discription=request.POST['description'],
-                image=request.POST['image'],
                 date=request.POST['period'],
                 price=request.POST['price'],
                 personce=request.POST['nb'],
+                pack_image = uploaded_image,
             )
             new_Pack.save()
             messages.success(request,'PACKAGE ADDED SUCCESSFULLY !!')
             return redirect('/add_pack')
     return render(request, 'add_package.html')
+
+@login_required
+def delete_pack_from_check(request,id):
+    pack = get_object_or_404(Package, id=id)
+    pack.checked_out_by.remove(request.user)
+    messages.success(request, 'You have been removed from this package.')
+    return redirect('/checkout')
+
+

@@ -97,7 +97,12 @@
             <main class="page-contento">
         {% for p in package %}
       
-                <div class="cardo" style="position: relative; background-image: url(' /static/img/{{p.image}} '); background-size: cover; background-repeat: no-repeat;">
+                <!-- <div class="cardo" style="position: relative; background-image: url(' /static/img/{{p.image}} '); background-size: cover; background-repeat: no-repeat;"> -->
+                {%if p.pack_image%}
+                <div class="cardo" style="position: relative; background-image: url('{{p.pack_image.url}}'); background-size: cover; background-repeat: no-repeat;">
+                {%else%}
+                <div class="cardo" style="position: relative; background-image: url(''); background-size: cover; background-repeat: no-repeat;">
+                {%endif%}
                     <div class="contento">
                     <h2 class="titlee" style="color: white;">{{p.country}}</h2>
                     <p class="copy">{{p.discription}}</p><p class="copy"><strong>{{p.personce}}</strong> Persons --> {{p.date}}</p><p class="copy"><h3 class="copy" style="color: white;">for<strong> only {{p.price}} $</strong></h3></p>

@@ -107,21 +107,21 @@
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
+                       
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li>
+                            {% if user.is_authenticated and user.is_staff %}
                             <a class="profile-pic" href="#">
-                                <img src="{% static 'plugins/images/users/genu.jpg' %}" alt="user-img" width="36"
+                                <img src="{% static 'plugins/images/users/add.png' %}" alt="user-img" width="36"
                                     class="img-circle"><span class="text-white font-medium">{{user}}</span></a>
+
+                            {%else%}
+                            <a class="profile-pic" href="#">
+                                <img src="{% static 'plugins/images/users/goku.jpg' %}" alt="user-img" width="36"
+                                    class="img-circle"><span class="text-white font-medium">{{user}}</span></a>
+                            {% endif %}
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
@@ -262,16 +262,11 @@
 <script>
   // Add click event listener to the Logout link
   document.getElementById('logoutLink').addEventListener('click', function() {
-    // Show a simple JavaScript confirmation dialog
     var isConfirmed = window.confirm('Are you sure you want to logout?');
-    
-    // If the user clicks OK, perform the logout action
-    if (isConfirmed) {
-      window.location.href = '/logout'; // Replace with the actual logout URL
+        if (isConfirmed) {
+      window.location.href = '/logout'; 
     }
   });
-
-
     // Auto-close the alert after 5 seconds (5000 milliseconds)
         $(document).ready(function() {
           setTimeout(function() {
