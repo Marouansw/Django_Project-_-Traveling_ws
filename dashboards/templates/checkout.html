@@ -38,7 +38,7 @@
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>FLIGHT+HOTEL
                                               </div>
                                               <!-- <span>310</span> -->
                                             </div>
@@ -49,7 +49,6 @@
                                               <span class="text-primary"> • </span>
                                               <span>{{p.date}}</span>
                                               <span class="text-primary"> • </span>
-                                              <span>FLIGHT+HOTEL</span>
                                             </div>
                                           </div>
                                           <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
@@ -71,7 +70,63 @@
                                   </div>
                                 </div></div></section>
                                 {%endfor%}
-                              {%if packages or flight%}
+                                {% for f in flights%}
+                            <section style="background-color: #000000;">
+                              <div class="container py-5" >
+                                <div class="row justify-content-center mb-3" >
+                                  <div class="col-md-12 col-xl-10">
+                                    <div class="card shadow-0 border rounded-3">
+                                      <div class="card-body" style="padding-top:1px; padding-bottom:4px ;padding-left: 1px; height: 161px;margin-top:10px;margin-bottom: 5px;">
+                                        <div class="row">
+                                          <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0" style="margin: 0;">
+                                            <div class="bg-image hover-zoom ripple rounded ripple-surface" style="width:500px;margin: 0;">
+                                              <img src="{% static 'img/flight.jpg' %}" style="width: 180px;height:170px ;">
+                                              <a href="#!">
+                                                <div class="hover-overlay">
+                                                  <div class="mask" style="background-color: rgb(253, 253, 253);"></div>
+                                                </div>
+                                              </a>
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6 col-lg-6 col-xl-6">
+                                            <h4>{{f.type}} from {{f.depart}} ----> {{f.destination}}</h4>
+                                            <div class="d-flex flex-row">
+                                              <div class="text-danger mb-1 me-2">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                              </div>
+                                              <!-- <span>310</span> -->
+                                            </div>
+                                            <div class="mt-1 mb-0 text-muted small">
+                                              • <span>Depart at {{f.hour_d}}</span><br>
+                                              <span class="text-primary"> </span>
+                                              <span>Arrive at {{f.hour_a}} </span> 
+                                              <span class="text-primary"> • </span>
+
+                                            </div>
+                                          </div>
+                                          <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                                            <div class="d-flex flex-row align-items-center mb-1">
+                                              <h4 class="mb-1 me-1">{{f.price}} $</h4>
+                                            </div>
+                                            <h6 class="text-success">{{f.type}} ITEM</h6>
+                                            <div class="d-flex flex-column mt-4">
+                                              <a href="#" class="delete-flight-from-check" data-id="{{ f.id }}">
+                                              <button class="btn btn-primary btn-sm" style="width: 155px;">Discard</button></a>
+                                              <!-- <button class="btn btn-outline-primary btn-sm mt-2" type="button">
+                                                Add to wishlist
+                                              </button> -->
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div></div></section>
+                                {%endfor%}
+                              {%if packages or flights %}
                               <a href="/paiment">
                               <button type="button" class="btn btn-success" >Validate Checkout</button></a>
                               {%else%}
@@ -107,6 +162,31 @@ window.location.href = '/delete_pack_from_check/' + id;
 });
 });
 });
+
+
+document.querySelectorAll('.delete-flight-from-check').forEach(function(link) {
+link.addEventListener('click', function (event) {
+event.preventDefault(); // Prevent the default behavior of the anchor tag
+
+var id = link.getAttribute('data-id');
+
+// Show SweetAlert confirmation
+Swal.fire({
+title: 'Are you sure?',
+text: 'You won\'t be able to revert this!',
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Yes, Discard item!'
+}).then((result) => {
+if (result.isConfirmed) {
+
+window.location.href = '/delete_flight_from_check/' + id; 
+}
+});
+});
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.3/dist/sweetalert2.all.min.js"></script>
 {% if messages %}
@@ -117,7 +197,7 @@ position: "center",
 icon: "success",
 title: "{{message}}",
 showConfirmButton: false,
-timer: 1800
+timer: 1900
 });
 </script>
 {% endfor %}

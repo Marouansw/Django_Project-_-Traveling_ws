@@ -53,32 +53,53 @@
                 <!-- ============================================================== -->
                 <!-- PRODUCTS YEARLY SALES -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Products Yearly Sales</h3>
-                            <div class="d-md-flex">
-                                <ul class="list-inline d-flex ms-auto">
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
-                                    </li>
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div id="ct-visits" style="height: 405px;">
-                                <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
-                                        class="chartist-tooltip-value">6</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- ============================================================== -->
-                <!-- RECENT SALES -->
+                
                 <!-- ============================================================== -->
                 
-                                
+                                <!-- .col -->
+                                <div class="col-md-12 col-lg-8 col-sm-12">
+                                    <div class="card white-box p-0">
+                                        <div class="card-body">
+                                            <h3 class="box-title mb-0">RECENT NOTIFICATIONS</h3>
+                                        </div>
+                                        <div class="comment-widgets">
+                                            {% for n in notifications %}
+                                            <!-- Comment Row -->
+                                            <div class="d-flex flex-row comment-row p-3 mt-0">
+                                                <div class="p-2">
+                                                    {% if n.type == "PACKAGE" %}
+                                                    <img src="{{n.image.url}}"  style="width:60px;height: 60px; object-fit: cover;" class="rounded-circle">
+                                                    {% elif n.type == "FLIGHT" %}
+                                                    <img src="{% static 'img/flight.jpg' %}"  style="width:60px;height: 60px; object-fit: cover;" class="rounded-circle">
+                                                    {% elif n.type == "USER" %}
+                                                    <img src="{% static 'img/userr.jpg' %}"  style="width:60px;height: 60px; object-fit: cover;" class="rounded-circle">
+                                                    {% elif n.type == "DOLLAR" %}
+                                                    <img src="{% static 'img/dollar.jpg' %}"  style="width:60px;height: 60px; object-fit: cover;" class="rounded-circle">
+                                                    {% elif n.type == "NEW_USER" %}
+                                                    <img src="{% static 'img/userr.jpg' %}"  style="width:60px;height: 60px; object-fit: cover;" class="rounded-circle">
+                                                    
+                                                    {% endif %}
+                                                </div>
+                                                <div class="comment-text ps-2 ps-md-3 w-100">
+                                                    <h5 class="font-medium" style="text-transform:uppercase;">
+                                                        {% if n.type != "NEW_USER" %}
+                                                        <strong>{{n.recipient}} {{n.last_name}}</strong>
+                                                        {% else %}
+                                                        <strong>NEW USER</strong>
+                                                        {%endif%}
+                                                    </h5>
+                                                    <span class="mb-3 d-block">{{n.message}} </span>
+                                                    <div class="comment-footer d-md-flex align-items-center">
+                                                        <a href="/delete_notif/{{ n.id }}">
+                                                            <span class="badge bg-danger rounded">Delete</span></a>
+                                                         
+                                                        <div class="text-muted fs-2 ms-auto mt-2 mt-md-0">{{n.timestamp}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>            
            {% endblock  %}
            

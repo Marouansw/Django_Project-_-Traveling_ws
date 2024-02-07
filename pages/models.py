@@ -34,3 +34,18 @@ class Flight(models.Model):
 
  def _str_(self):
   return self.destination
+ 
+
+class Notification(models.Model):
+    id = models.AutoField(primary_key=True)
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
+    last_name = models.CharField(max_length=255,blank=True)
+    message = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
+    type = models.CharField(max_length=255,blank=True)
+
+ 
+    def _str_(self):
+     return self.recipient
+ 

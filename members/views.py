@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from members.forms import RegisterUserForm
+from pages.models import Notification
 # Create your views here.
 
 def register_user(request):
@@ -18,7 +19,15 @@ def register_user(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             user1 = authenticate(request,username=username,password=password)
+            user.save()
             login(request,user)
+            notification = Notification(
+            recipient=request.user,
+            last_name = request.user.last_name,
+            type= "NEW_USER",
+            message = f"{request.user.first_name} {request.user.last_name} has just signed in ",  # Customize the message based on the action
+        )
+            notification.save()
             messages.success(request,"REGISTRED SUCCESSFULLY !! ")
             return redirect('/index.html')
     else:

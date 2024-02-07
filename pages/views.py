@@ -2,7 +2,7 @@ from multiprocessing import context
 from django.http import HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.template import RequestContext, loader
-from .models import Package,Flight
+from .models import Package,Flight,Notification
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import sweetify
@@ -51,20 +51,35 @@ def checkout_package(request,cntr):
         sweetify.info(request, 'PACKAGE IS ALREADY ADDED TO CARD!!', button='Ok', timer=3000)
     else:
         pack.checked_out_by.add(request.user)
-        pack.save()
+        pack.save()  
+        notification = Notification(
+            recipient=request.user,
+            last_name = request.user.last_name,
+            image = pack.pack_image,
+            type= "PACKAGE",
+            message = f"{request.user.first_name} Checked out {pack.country}'s PACKAGE ",  # Customize the message based on the action
+        )
+        notification.save()
         sweetify.success(request,'PACKAGE ADDED TO CARD!!',button='Ok', timer=3000)
 
     return redirect('/package.html')  
 
 @login_required
 def delete_package(request,id):
-    pack = Package.objects.filter(id=id)
-    if pack.delete() :
-        sweetify.success(request, ' PACKAGE DELETED !!')
-        return redirect('/package.html')  
+    pack = Package.objects.get(id=id)
+    notification = Notification(
+            recipient=request.user,
+            image = pack.pack_image,
+            type= "PACKAGE",
+            message = f"{request.user} DELETED {pack.country}'s PACKAGE ",  # Customize the message based on the action
+        )
+    notification.save()
+    pack.delete() 
+    sweetify.success(request, ' PACKAGE DELETED !!')
+    return redirect('/package.html')  
 
 
-
+@login_required
 def flight(request):
     if request.method == 'POST':
         depart_location = request.POST.get('depart')
@@ -92,6 +107,13 @@ def checkout_flight(request,fid):
     else:
         flight.checked_out_by.add(request.user)
         flight.save()
+        notification = Notification(
+            recipient=request.user,
+            last_name = request.user.last_name,
+            type= "FLIGHT",
+            message = f"{request.user.first_name} Checked out the flight from {flight.depart} ----> to {flight.destination}",  # Customize the message based on the action
+        )
+        notification.save()
         sweetify.success(request,'FLIGHT ADDED TO CARD!!',button='Ok', timer=3000)
 
     return redirect('/index.html')  # Redirect to the user's profile page or another appropriate page
@@ -99,10 +121,16 @@ def checkout_flight(request,fid):
 
 @login_required
 def delete_flight(request,id):
-    flight = Flight.objects.filter(id=id)
-    if flight.delete() :
-        sweetify.success(request, ' FLIGHT DELETED !!')
-        return redirect('/index.html')  
+    flight = Flight.objects.get(id=id)
+    notification = Notification(
+            recipient=request.user,
+            type= "FLIGHT",
+            message = f"{request.user} DELETED the flight from {flight.depart} ----> to {flight.destination}",  # Customize the message based on the action
+        )
+    notification.save()
+    flight.delete() 
+    sweetify.success(request, ' FLIGHT DELETED !!')
+    return redirect('/index.html')  
 
 
 def contact(request):
